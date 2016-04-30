@@ -3,7 +3,7 @@ module Audited
     def self.included(base)
       base.send :attr_reader, :current_user
 
-      base.send :around_perform do |job, block|
+      base.send :around_perform do |_job, block|
         options = arguments.extract_options!
         @current_user = options.delete(:current_user)
         arguments << options unless options.empty?
