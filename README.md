@@ -1,7 +1,7 @@
 # Audited::ActiveJob
 
 [![Build Status](https://travis-ci.org/markrebec/audited-activejob.png)](https://travis-ci.org/markrebec/audited-activejob)
-[![Coverage Status](https://coveralls.io/repos/markrebec/audited-activejob/badge.svg)](https://coveralls.io/r/markrebec/audited-activejob)
+[![Coverage Status](https://coveralls.io/repos/markrebec/audited-activejob/badge.svg?cache=1)](https://coveralls.io/r/markrebec/audited-activejob)
 [![Code Climate](https://codeclimate.com/github/markrebec/audited-activejob.png)](https://codeclimate.com/github/markrebec/audited-activejob)
 [![Gem Version](https://badge.fury.io/rb/audited-activejob.png)](http://badge.fury.io/rb/audited-activejob)
 [![Dependency Status](https://gemnasium.com/markrebec/audited-activejob.png)](https://gemnasium.com/markrebec/audited-activejob)
