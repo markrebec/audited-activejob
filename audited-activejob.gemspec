@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.add_dependency "activejob"
   s.add_dependency "audited"
 
+  s.add_development_dependency "activejob-users"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
 end

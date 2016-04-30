@@ -36,6 +36,33 @@ RSpec.describe Audited::ActiveJob do
     end
   end
 
+  describe '#audit_user' do
+    let(:audit_user) { {email: 'audit@example.com'} }
+    let(:job_user) { {email: 'job@example.com'} }
+
+    context 'when a job_user argument is passed to the job' do
+      context 'and no audit_user argument is passed to the job' do
+        it 'falls back to the job_user argument' do
+          subject.arguments << {job_user: job_user}
+          subject.extract_job_user!
+          subject.extract_audit_user!
+
+          expect(subject.audit_user).to eq(job_user)
+        end
+      end
+
+      context 'and an audit_user argument is passed to the job' do
+        it 'prefers the audit_user argument' do
+          subject.arguments << {job_user: job_user, audit_user: audit_user}
+          subject.extract_job_user!
+          subject.extract_audit_user!
+
+          expect(subject.audit_user).to eq(audit_user)
+        end
+      end
+    end
+  end
+
   describe 'around_perform' do
     it 'calls extract_audit_user!' do
       expect_any_instance_of(TestJob).to receive(:extract_audit_user!)

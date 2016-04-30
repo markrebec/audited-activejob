@@ -1,6 +1,7 @@
 require 'coveralls'
 Coveralls.wear!
 require 'active_job'
+require 'active_job/users'
 require 'audited'
 require 'audited-activejob'
 require 'rspec'
