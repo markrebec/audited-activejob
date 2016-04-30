@@ -1,8 +1,6 @@
 module ActiveJob
   module Audited
-    extend ActiveSupport::Concern
-
-    included do |base|
+    def self.included(base)
       base.send :attr_reader, :current_user
 
       base.send :around_perform do |job, block|
