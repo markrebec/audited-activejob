@@ -8,12 +8,8 @@ module ActiveJob
         @current_user = options.delete(:current_user)
         arguments << options unless options.empty?
         
-        if current_user.nil?
+        ::Audited.audit_class.as_user(current_user) do
           block.call
-        else
-          ::Audited.audit_class.as_user(current_user) do
-            block.call
-          end
         end
       end
     end
