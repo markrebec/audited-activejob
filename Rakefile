@@ -19,7 +19,7 @@ task :build do
 end
 
 task :push do
-  require 'active_job/audited/version'
+  require 'audited/active_job/version'
   puts `gem push audited-activejob-#{Audited::ActiveJob::VERSION}.gem`
 end
 
