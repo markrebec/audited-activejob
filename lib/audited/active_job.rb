@@ -3,9 +3,8 @@ module Audited
     def self.included(base)
       base.send :include, ::ActiveJob::Users if defined?(::ActiveJob::Users)
 
+      base.send :before_perform, :extract_audit_user!
       base.send :around_perform do |_job, block|
-        extract_audit_user!
-
         Audited.audit_class.as_user(audit_user) do
           block.call
         end

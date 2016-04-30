@@ -63,12 +63,14 @@ RSpec.describe Audited::ActiveJob do
     end
   end
 
-  describe 'around_perform' do
+  describe 'before_perform' do
     it 'calls extract_audit_user!' do
       expect_any_instance_of(TestJob).to receive(:extract_audit_user!)
       TestJob.perform_now
     end
+  end
 
+  describe 'around_perform' do
     it 'calls Audited.audit_class.as_user with the audit_user' do
       expect(Audited.audit_class).to receive(:as_user).with(nil)
       TestJob.perform_now
