@@ -1,10 +1,10 @@
-# ActiveJob::Audited
+# Audited::ActiveJob
 
-[![Code Climate](https://codeclimate.com/github/markrebec/activejob-audited.png)](https://codeclimate.com/github/markrebec/activejob-audited)
-[![Gem Version](https://badge.fury.io/rb/activejob-audited.png)](http://badge.fury.io/rb/activejob-audited)
-[![Dependency Status](https://gemnasium.com/markrebec/activejob-audited.png)](https://gemnasium.com/markrebec/activejob-audited)
+[![Code Climate](https://codeclimate.com/github/markrebec/audited-activejob.png)](https://codeclimate.com/github/markrebec/audited-activejob)
+[![Gem Version](https://badge.fury.io/rb/audited-activejob.png)](http://badge.fury.io/rb/audited-activejob)
+[![Dependency Status](https://gemnasium.com/markrebec/audited-activejob.png)](https://gemnasium.com/markrebec/audited-activejob)
 
-`ActiveJob::Audited` ties together [activejob](https://github.com/rails/activejob) and [audited](https://github.com/collectiveidea/audited) to allow passing an optional `current_user` through to your `ActiveJob` classes. It also wraps the execution of your `MyJob#perform` method with `Audited.audit_class.as_user`, which automatically associates any audits generated in your jobs to the `current_user` you pass through (usually the user who triggered the job, if there is one).
+`Audited::ActiveJob` ties together [activejob](https://github.com/rails/activejob) and [audited](https://github.com/collectiveidea/audited) to allow passing an optional `current_user` through to your `ActiveJob` classes. It also wraps the execution of your `MyJob#perform` method with `Audited.audit_class.as_user`, which automatically associates any audits generated in your jobs to the `current_user` you pass through (usually the user who triggered the job, if there is one).
 
 In cases where you do not pass a `current_user` argument to `MyJob.perform_now` or `MyJob.perform_later` (i.e. jobs queued up by automated processes) everything will behave as usual, and any generated audits will not have a user associated with them.
 
@@ -12,17 +12,17 @@ In cases where you do not pass a `current_user` argument to `MyJob.perform_now` 
 
 Just add the gem to your `Gemfile` and run `bundle install`:
 
-    gem 'activejob-audited'
+    gem 'audited-activejob'
 
 ## Usage
 
 #### current_user
 
-First, the gem provides a `current_user` method to any jobs that include the `ActiveJob::Audited` mixin, which you can use however you like within your jobs. You can populate this when queueing up your job by passing a `current_user: user` keyword argument. **Note: You do not need to modify your job's `MyJob#perform` method to accept this extra argument.**
+First, the gem provides a `current_user` method to any jobs that include the `Audited::ActiveJob` mixin, which you can use however you like within your jobs. You can populate this when queueing up your job by passing a `current_user: user` keyword argument. **Note: You do not need to modify your job's `MyJob#perform` method to accept this extra argument.**
 
 ```ruby
 class MyJob < ActiveJob::Base
-  include ActiveJob::Audited
+  include Audited::ActiveJob
   queue_as :default
 
   def perform
@@ -45,7 +45,7 @@ MyJob.perform_later current_user: current_user
 
 #### Audits
 
-Any job that includes the `ActiveJob::Audited` mixin will also have it's `MyJob#perform` method wrapped with `Audited.audit_class.as_user(current_user)` in an `around_perform` block. This ensures that any audits generated during your job execution will be associated with the provided user.
+Any job that includes the `Audited::ActiveJob` mixin will also have it's `MyJob#perform` method wrapped with `Audited.audit_class.as_user(current_user)` in an `around_perform` block. This ensures that any audits generated during your job execution will be associated with the provided user.
 
 ```ruby
 class MyModel < ActiveRecord::Base
@@ -55,7 +55,7 @@ class MyModel < ActiveRecord::Base
 end
 
 class MyJob < ActiveJob::Base
-  include ActiveJob::Audited
+  include Audited::ActiveJob
   queue_as :default
 
   def perform(my_model)

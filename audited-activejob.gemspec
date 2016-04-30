@@ -1,14 +1,14 @@
 $:.push File.expand_path("../lib", __FILE__)
-require "active_job/audited/version"
+require "audited/active_job/version"
 
 Gem::Specification.new do |s|
-  s.name        = "activejob-audited"
-  s.version     = ActiveJob::Audited::VERSION
+  s.name        = "audited-activejob"
+  s.version     = Audited::ActiveJob::VERSION
   s.summary     = "Pass a current_user through to your active_jobs and use it in any generated audits"
   s.description = "Pass a current_user through to your active_jobs and use it in any generated audits"
   s.authors     = ["Mark Rebec"]
   s.email       = ["mark@markrebec.com"]
-  s.homepage    = "http://github.com/markrebec/activejob-audited"
+  s.homepage    = "http://github.com/markrebec/audited-activejob"
 
   s.files       = Dir["lib/**/*"]
   s.test_files  = Dir["spec/**/*"]
