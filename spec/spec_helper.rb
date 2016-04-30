@@ -1,9 +1,11 @@
 require 'coveralls'
 Coveralls.wear!
+require 'active_job'
+require 'audited'
 require 'audited-activejob'
 require 'rspec'
 
-#Dir[File.join(File.dirname(__FILE__), '..', "spec/support/**/*.rb")].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), '..', "spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
