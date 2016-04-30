@@ -72,6 +72,15 @@ MyJob.perform_later MyModel.find(1)
 MyJob.perform_later MyModel.find(1), audit_user: User.find(1)
 ```
 
+## ActiveJob::Users
+
+`audited-activejob` has a loose/optional dependency on [`activejob-users`](https://github.com/markrebec/activejob-users), and if you're using both gems the `audit_user` method will fallback to your existing `job_user` arguments you're already using, so you don't have to make any changes and everything will just work.
+
+```ruby
+# associates all created audits with the provided user
+MyJob.perform_later MyModel.find(1), job_user: current_user
+```
+
 ## Contributing
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
